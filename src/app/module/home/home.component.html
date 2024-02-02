@@ -1,0 +1,31 @@
+<mat-form-field style="padding: 10px; width: 300px">
+    <mat-label>Search room</mat-label>
+    <input
+        matInput
+        type="text"
+        [(ngModel)]="searchInputValue"
+        (ngModelChange)="onSearchRoomById($event)"
+    />
+    @if (searchInputValue.length > 0) {
+        <button
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="onSearchRoomById('')"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    }
+</mat-form-field>
+
+<br />
+<mat-grid-list cols="4" rowHeight="2:1">
+    @for (item of searchResult; track $index) {
+        <mat-grid-tile>
+            <app-room-item
+                [roomItem]="item"
+                style="padding: 10px"
+            ></app-room-item>
+        </mat-grid-tile>
+    }
+</mat-grid-list>

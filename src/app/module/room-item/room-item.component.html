@@ -1,0 +1,23 @@
+<mat-card>
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title
+            >{{ roomItem.owner.firstName }}
+            {{ roomItem.owner.lastName }}</mat-card-title
+        >
+        <mat-card-subtitle>{{ roomItem.owner.username }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>{{ roomItem.description }}</p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button
+            mat-flat-button
+            color="primary"
+            [routerLink]="['/chat-room/', roomItem.id, roomItem]"
+        >
+            ENTER
+        </button>
+        <button mat-button>INFO</button>
+    </mat-card-actions>
+</mat-card>

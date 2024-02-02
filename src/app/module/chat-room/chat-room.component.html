@@ -1,0 +1,47 @@
+<section style="padding: 10px">
+    <button mat-flat-button color="primary" routerLink="/">
+        <mat-icon>arrow_back</mat-icon>Back
+    </button>
+
+    <mat-card class="container">
+        <mat-card-header class="msg-header">
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>
+                {{ participant.lastName }}
+                {{ participant.firstName }}
+            </mat-card-title>
+            <mat-card-subtitle>{{ roomId }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="msg-box-container">
+            <p>
+                The Shiba Inu is the smallest of the six original and distinct
+                spitz breeds of dog from Japan. A small, agile dog that copes
+                very well with mountainous terrain, the Shiba Inu was originally
+                bred for hunting.
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <mat-form-field
+                appearance="outline"
+                color="primary"
+                class="msg-bar"
+            >
+                <input
+                    matInput
+                    type="text"
+                    [(ngModel)]="msgValue"
+                    (ngModelChange)="setMsgValue($event)"
+                    (keydown.enter)="sendMessage()"
+                />
+                <button
+                    matSuffix
+                    mat-icon-button
+                    style="margin: 5px"
+                    (click)="sendMessage()"
+                >
+                    <mat-icon>send</mat-icon>
+                </button>
+            </mat-form-field>
+        </mat-card-actions>
+    </mat-card>
+</section>
