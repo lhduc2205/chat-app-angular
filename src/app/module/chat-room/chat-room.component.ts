@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { type User } from '../../model/user';
+import { ChatRoomService } from '../../service/chat-room/chat-room.service';
 
 @Component({
     selector: 'app-chat-room',
@@ -24,13 +25,18 @@ import { type User } from '../../model/user';
     ],
 })
 export class ChatRoomComponent {
-    route: ActivatedRoute = inject(ActivatedRoute);
-    roomId: string;
-    participant!: User;
+    private route: ActivatedRoute = inject(ActivatedRoute);
+    private chatRoomService: ChatRoomService = inject(ChatRoomService);
+
+    roomId: number;
+    participant?: User;
     msgValue: string = '';
 
     constructor() {
-        this.roomId = this.route.snapshot.paramMap.get('id') ?? 'null';
+        this.roomId = Number(this.route.snapshot.paramMap.get('id')) ?? 'null';
+        this.participant = this.chatRoomService.getChatRoomById(
+            this.roomId
+        )?.owner;
     }
 
     setMsgValue(newValue: string): void {

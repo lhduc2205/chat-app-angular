@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RoomItemComponent } from '../room-item/room-item.component';
 import { type ChatRoom } from '../../model/room-item';
 
@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { chatRoomData } from '../../data/chat-room-data';
+import { ChatRoomService } from '../../service/chat-room/chat-room.service';
 
 @Component({
     selector: 'app-home',
@@ -26,15 +26,20 @@ import { chatRoomData } from '../../data/chat-room-data';
     ],
 })
 export class HomeComponent {
-    chatRoom: ChatRoom[] = chatRoomData;
+    private chatRoomService: ChatRoomService = inject(ChatRoomService);
 
-    searchResult = this.chatRoom;
-
+    chatRooms: ChatRoom[] = [];
+    searchResult: ChatRoom[] = [];
     searchInputValue = '';
+
+    constructor() {
+        this.chatRooms = this.chatRoomService.getAllChatRooms();
+        this.searchResult = this.chatRooms;
+    }
 
     onSearchRoomById(searchText: string): void {
         if (searchText === '') {
-            this.searchResult = this.chatRoom;
+            this.searchResult = this.chatRooms;
             this.clearSearchInputValue();
             return;
         }

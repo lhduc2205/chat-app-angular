@@ -7,10 +7,10 @@
         <mat-card-header class="msg-header">
             <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title>
-                {{ participant.lastName }}
-                {{ participant.firstName }}
+                {{ participant?.lastName }}
+                {{ participant?.firstName }}
             </mat-card-title>
-            <mat-card-subtitle>{{ roomId }}</mat-card-subtitle>
+            <mat-card-subtitle>{{ participant?.username }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="msg-box-container">
             <p>
